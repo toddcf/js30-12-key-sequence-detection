@@ -5,23 +5,13 @@
   <title>Key Detection</title>
   <!-- Removed Cornify because it's so stupid: -->
   <!-- <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script> -->
-  <style type="text/css">
-    .easterEgg {
-      display: none;
-    }
-  </style>
 </head>
 <body>
-
-  <h1>Key Sequence Detection</h1>
-  <p>Type in the Konami code from Contra . . .</p>
-  <p class="easterEgg">+30 Lives!</p>
 
   <script>
 
     const pressedKeys = [];
     const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
-    const easterEggText = document.querySelector('.easterEgg');
 
     window.addEventListener('keyup', (e) => {
       console.log(e.key);
@@ -32,7 +22,6 @@
       pressedKeys.splice(-secretCode - 1, pressedKeys.length - secretCode.length);
       if ( pressedKeys.join('').includes(secretCode) ) {
         console.log('30 Lives!');
-        easterEggText.style.display = 'block';
       }
     });
 
