@@ -6,35 +6,65 @@
   <!-- Removed Cornify because it's so stupid: -->
   <!-- <script type="text/javascript" src="https://www.cornify.com/js/cornify.js"></script> -->
   <style type="text/css">
-    .easterEgg {
+    .banner {
+      text-align: center;
+    }
+    .easterEggDiv {
       display: none;
+      text-align: center;
+    }
+    .easterEggImg {
+      display: block;
+      margin: 0 auto;
+    }
+    .easterEggText {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    .menu {
+      display: block;
+      margin: 0 auto;
+      position: relative;
     }
   </style>
 </head>
 <body>
 
-  <h1>Key Sequence Detection</h1>
-  <p>Type in the Konami code from Contra . . .</p>
-  <p class="easterEgg">+30 Lives!</p>
+  <div class="banner">
+    <h1>Key Sequence Detection</h1>
+    <p>Type in the Konami code from Contra . . .</p>
+  </div>
+
+  <img class="menu" src="img/menu.jpg">
+  <div class="easterEggDiv">
+    <img class="easterEggImg" src="img/bonus.png">
+    <p class="easterEggText">+30 Lives!</p>
+  </div>
 
   <script>
 
-    const pressedKeys = [];
-    const secretCode = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
-    const easterEggText = document.querySelector('.easterEgg');
-
-    window.addEventListener('keyup', (e) => {
-      console.log(e.key);
-      pressedKeys.push(e.key);
-      console.log(pressedKeys);
-
-      // Trim array to be no longer than the secretCode:
-      pressedKeys.splice(-secretCode - 1, pressedKeys.length - secretCode.length);
-      if ( pressedKeys.join('').includes(secretCode) ) {
-        console.log('30 Lives!');
-        easterEggText.style.display = 'block';
+    const konamiCode = {
+      pressedKeys: [],
+      secretCode: 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba',
+      easterEggDiv: document.querySelector('.easterEggDiv'),
+      menu: document.querySelector('.menu'),
+      init: () => {
+        window.addEventListener('keyup', (e) => {
+          // Add each key press to the array:
+          konamiCode.pressedKeys.push(e.key);
+          // Trim array to be no longer than the secretCode:
+          konamiCode.pressedKeys.splice(-konamiCode.secretCode - 1, konamiCode.pressedKeys.length - konamiCode.secretCode.length);
+          // "Join" the pressedKeys array into a string and check if it maches the secretCode:
+          if ( konamiCode.pressedKeys.join('').includes(konamiCode.secretCode) ) {
+            // When code is entered, change the image and add text:
+            konamiCode.menu.style.display = 'none';
+            konamiCode.easterEggDiv.style.display = 'block';
+          }
+        });
       }
-    });
+    }
+
+    konamiCode.init();
 
   </script>
 
