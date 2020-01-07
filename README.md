@@ -1,2 +1,3 @@
-# js30-12-key-sequence-detection
+# JavaScript 30 #12: Key Sequence Detection
+
 Konami Code
